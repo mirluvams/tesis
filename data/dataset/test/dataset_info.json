@@ -1,0 +1,44 @@
+{
+  "builder_name": "generator",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "generator",
+  "dataset_size": 1058746,
+  "description": "",
+  "download_checksums": {},
+  "download_size": 0,
+  "features": {
+    "image": {
+      "_type": "Image"
+    },
+    "light_level": {
+      "dtype": "float32",
+      "_type": "Value"
+    },
+    "fume_strength": {
+      "dtype": "float32",
+      "_type": "Value"
+    },
+    "explosion_strength": {
+      "dtype": "float32",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 1058746,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 1058746,
+      "num_examples": 18910,
+      "dataset_name": "generator"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
