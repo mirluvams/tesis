@@ -37,7 +37,7 @@
       "filename": "data-00011-of-00012.arrow"
     }
   ],
-  "_fingerprint": "b1076b3c15d08921",
+  "_fingerprint": "364d75ece548bdeb",
   "_format_columns": [
     "explosion_strength",
     "fume_strength",
@@ -45,7 +45,7 @@
     "light_level"
   ],
   "_format_kwargs": {},
-  "_format_type": null,
+  "_format_type": "torch",
   "_output_all_columns": false,
   "_split": "train"
 }

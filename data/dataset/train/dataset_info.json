@@ -3,14 +3,11 @@
   "citation": "",
   "config_name": "default",
   "dataset_name": "generator",
-  "dataset_size": 1058746,
+  "dataset_size": 1058634,
   "description": "",
   "download_checksums": {},
   "download_size": 0,
   "features": {
-    "image": {
-      "_type": "Image"
-    },
     "light_level": {
       "dtype": "float32",
       "_type": "Value"
@@ -22,16 +19,19 @@
     "explosion_strength": {
       "dtype": "float32",
       "_type": "Value"
+    },
+    "image": {
+      "_type": "Image"
     }
   },
   "homepage": "",
   "license": "",
-  "size_in_bytes": 1058746,
+  "size_in_bytes": 1058634,
   "splits": {
     "train": {
       "name": "train",
-      "num_bytes": 1058746,
-      "num_examples": 18910,
+      "num_bytes": 1058634,
+      "num_examples": 18908,
       "dataset_name": "generator"
     }
   },
