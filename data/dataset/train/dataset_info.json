@@ -3,7 +3,7 @@
   "citation": "",
   "config_name": "default",
   "dataset_name": "generator",
-  "dataset_size": 1058634,
+  "dataset_size": 1379546,
   "description": "",
   "download_checksums": {},
   "download_size": 0,
@@ -22,15 +22,35 @@
     },
     "image": {
       "_type": "Image"
+    },
+    "old_class": {
+      "names": [
+        "UNK",
+        "INA",
+        "FUM",
+        "EXP",
+        "EXP+FUM"
+      ],
+      "_type": "ClassLabel"
+    },
+    "class": {
+      "names": [
+        "UNK",
+        "INA",
+        "FUM",
+        "EXP",
+        "EXP+FUM"
+      ],
+      "_type": "ClassLabel"
     }
   },
   "homepage": "",
   "license": "",
-  "size_in_bytes": 1058634,
+  "size_in_bytes": 1379546,
   "splits": {
     "train": {
       "name": "train",
-      "num_bytes": 1058634,
+      "num_bytes": 1379546,
       "num_examples": 18908,
       "dataset_name": "generator"
     }

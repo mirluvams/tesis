@@ -17,13 +17,13 @@ model_names=[
     "microsoft/swinv2-tiny-patch4-window16-256",
     "microsoft/swinv2-base-patch4-window16-256",
     "facebook/dinov2-base",
-    "nvidia/MambaVision-B-1K",
     "microsoft/beit-base-patch16-224",
-    "google/vit-base-patch16-384",
+    "google/vit-base-patch16-224",
 ]
 
-model_base=model_names[2]
-model_output_name="dinov2-base"
+image_size=256
+model_base=model_names[0]
+model_output_name="swinv2-tiny"
 
 class ImageMultiRegressionConfig(PretrainedConfig):
     def __init__(
@@ -74,7 +74,7 @@ _train_transform = transforms.Compose([
     transforms.ToDtype(torch.float32, scale=True),  # Normalize expects float input
     transforms.RandomRotation(degrees=20),
     transforms.RandomHorizontalFlip(),
-    transforms.RandomResizedCrop(size=(256,256), scale=(.6,1.0), antialias=True),
+    transforms.RandomResizedCrop(size=(image_size,image_size), scale=(.6,1.0), antialias=True),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
@@ -85,7 +85,7 @@ def train_transform(ex):
 _test_transform = transforms.Compose([
     transforms.ToImage(),
     transforms.ToDtype(torch.float32, scale=True),  # Normalize expects float input
-    transforms.Resize(size=(256,256)),
+    transforms.Resize(size=(image_size,image_size)),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 

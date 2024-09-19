@@ -37,12 +37,14 @@
       "filename": "data-00011-of-00012.arrow"
     }
   ],
-  "_fingerprint": "0ef5c0a37f9e49e1",
+  "_fingerprint": "57df279308fbbed5",
   "_format_columns": [
+    "class",
     "explosion_strength",
     "fume_strength",
     "image",
-    "light_level"
+    "light_level",
+    "old_class"
   ],
   "_format_kwargs": {},
   "_format_type": "torch",
