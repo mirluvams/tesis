@@ -3,55 +3,32 @@
   "citation": "",
   "config_name": "default",
   "dataset_name": "generator",
-  "dataset_size": 1379546,
+  "dataset_size": 930562,
   "description": "",
   "download_checksums": {},
   "download_size": 0,
   "features": {
-    "light_level": {
-      "dtype": "float32",
-      "_type": "Value"
-    },
-    "fume_strength": {
-      "dtype": "float32",
-      "_type": "Value"
-    },
-    "explosion_strength": {
-      "dtype": "float32",
-      "_type": "Value"
-    },
     "image": {
       "_type": "Image"
     },
-    "old_class": {
-      "names": [
-        "UNK",
-        "INA",
-        "FUM",
-        "EXP",
-        "EXP+FUM"
-      ],
-      "_type": "ClassLabel"
-    },
     "class": {
       "names": [
-        "UNK",
-        "INA",
-        "FUM",
-        "EXP",
-        "EXP+FUM"
+        "INACTIVE",
+        "WITH_EXPLOSION",
+        "WITH_FUME",
+        "WITH_FUME_AND_EXPLOSION"
       ],
       "_type": "ClassLabel"
     }
   },
   "homepage": "",
   "license": "",
-  "size_in_bytes": 1379546,
+  "size_in_bytes": 930562,
   "splits": {
     "train": {
       "name": "train",
-      "num_bytes": 1379546,
-      "num_examples": 18908,
+      "num_bytes": 930562,
+      "num_examples": 18481,
       "dataset_name": "generator"
     }
   },
