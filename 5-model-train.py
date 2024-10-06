@@ -36,8 +36,7 @@ try:
     model=AutoModelForImageClassification.from_pretrained(model_output)
 except:
     model=AutoModelForImageClassification.from_pretrained(model_base)
-    model.config.num_labels = 4
-    model.num_labels = 4
+    model.config.num_labels = model.num_labels = 3
     model.classifier = (
         nn.Linear(model.swinv2.num_features, model.num_labels) if model.config.num_labels > 0 else nn.Identity()
     )
@@ -109,7 +108,7 @@ def compute_metrics(pred):
            "f1":sklearn.metrics.f1_score(x,y, average='weighted')}
 
 # weighted loss
-loss_fct = nn.CrossEntropyLoss(weight=torch.tensor([0.147, 0.754, 0.0452, 0.0538]).to("cuda"))
+loss_fct = nn.CrossEntropyLoss(weight=torch.tensor([.72, .16, .11]).to("cuda"))
 class WeightedLossTrainer(Trainer):
     def compute_loss(self, model, inputs, return_outputs=False):
         labels = inputs.get("labels")

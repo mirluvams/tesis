@@ -3,7 +3,7 @@
   "citation": "",
   "config_name": "default",
   "dataset_name": "generator",
-  "dataset_size": 930562,
+  "dataset_size": 867229,
   "description": "",
   "download_checksums": {},
   "download_size": 0,
@@ -15,19 +15,18 @@
       "names": [
         "INACTIVE",
         "WITH_EXPLOSION",
-        "WITH_FUME",
-        "WITH_FUME_AND_EXPLOSION"
+        "WITH_FUME"
       ],
       "_type": "ClassLabel"
     }
   },
   "homepage": "",
   "license": "",
-  "size_in_bytes": 930562,
+  "size_in_bytes": 867229,
   "splits": {
     "train": {
       "name": "train",
-      "num_bytes": 930562,
+      "num_bytes": 867229,
       "num_examples": 18481,
       "dataset_name": "generator"
     }
