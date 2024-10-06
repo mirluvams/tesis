@@ -1,3 +1,10 @@
+
+import os
+os.environ["NCCL_P2P_DISABLE"]="1"
+os.environ["NCCL_IB_DISABLE"]="1"
+os.environ["CUDA_VISIBLE_DEVICES"]="0,1"
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -10,7 +17,6 @@ from PIL import Image, ImageFile
 import numpy as np
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 import sys
-import os
 
 # pick one, then switch to the local model on retrains.
 model_names=[
@@ -20,9 +26,9 @@ model_names=[
     "google/vit-base-patch16-224",
 ]
 
-image_size=224
-model_base=model_names[3]
-model_output_name="vit-base"
+image_size=256
+model_base=model_names[1]
+model_output_name="swinv2-base"
 model_output=f"./models/{model_output_name}"
 model_output_tmp=f"~/tmp/models/{model_output_name}"
 
@@ -30,7 +36,11 @@ try:
     model=AutoModelForImageClassification.from_pretrained(model_output)
 except:
     model=AutoModelForImageClassification.from_pretrained(model_base)
-
+    model.config.num_labels = 4
+    model.num_labels = 4
+    model.classifier = (
+        nn.Linear(model.swinv2.num_features, model.num_labels) if model.config.num_labels > 0 else nn.Identity()
+    )
 
 #model_name="microsoft/swinv2-base-patch4-window16-256"
 dataset=load_from_disk("./data/dataset/")
@@ -63,9 +73,6 @@ def test_transform(ex):
 #_columns=["pixel_values", "light_level", "fume_strength", "explosion_strength"]
 dataset["train"].set_transform(train_transform)
 dataset["test"].set_transform(test_transform)
-
-os.environ["NCCL_P2P_DISABLE"]="1"
-os.environ["NCCL_IB_DISABLE"]="1"
 
 
 model_output_temp=f"~/tmp/models/{model_output_name}/"
@@ -101,7 +108,17 @@ def compute_metrics(pred):
     return {"accuracy":sklearn.metrics.accuracy_score(x, y),
            "f1":sklearn.metrics.f1_score(x,y, average='weighted')}
 
-trainer = Trainer(
+# weighted loss
+loss_fct = nn.CrossEntropyLoss(weight=torch.tensor([0.147, 0.754, 0.0452, 0.0538]).to("cuda"))
+class WeightedLossTrainer(Trainer):
+    def compute_loss(self, model, inputs, return_outputs=False):
+        labels = inputs.get("labels")
+        outputs = model(**inputs)
+        logits = outputs.get("logits")
+        loss = loss_fct(logits.view(-1, self.model.num_labels), labels.view(-1))
+        return (loss, outputs) if return_outputs else loss
+
+trainer = WeightedLossTrainer(
     model,
     trainer_args,
     train_dataset=dataset["train"],
