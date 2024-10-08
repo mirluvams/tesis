@@ -98,7 +98,7 @@ trainer_args = TrainingArguments(
 
 def collate_fn(examples):
     pixel_values = torch.stack([example["pixel_values"] for example in examples])#.to(DEVICE)
-    labels = torch.tensor([example["class"] for example in examples])
+    labels = torch.tensor([example["labels"] for example in examples])
     return {"pixel_values": pixel_values, "labels": labels, }
 
 def compute_metrics(pred):
@@ -108,7 +108,7 @@ def compute_metrics(pred):
            "f1":sklearn.metrics.f1_score(x,y, average='weighted')}
 
 # weighted loss
-loss_fct = nn.CrossEntropyLoss(weight=torch.tensor([.72, .16, .11]).to("cuda"))
+loss_fct = nn.CrossEntropyLoss(weight=torch.tensor([0.719245, 0.103285, 0.177469]).to("cuda"))
 class WeightedLossTrainer(Trainer):
     def compute_loss(self, model, inputs, return_outputs=False):
         labels = inputs.get("labels")
